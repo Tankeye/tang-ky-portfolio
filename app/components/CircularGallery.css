@@ -1,0 +1,63 @@
+.circular-gallery {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  outline: none;
+  isolation: isolate;
+}
+
+.circular-gallery.is-dragging { cursor: grabbing; }
+
+.circular-gallery:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(183, 255, 0, .7);
+  border-radius: 18px;
+  pointer-events: none;
+}
+
+.circular-gallery-card {
+  position: absolute;
+  top: 34px;
+  left: 50%;
+  height: 280px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 24px;
+  overflow: hidden;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  box-shadow: 0 28px 70px rgba(0, 0, 0, .4);
+  will-change: transform;
+}
+
+.circular-gallery-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(255, 255, 255, .25), transparent 44%);
+}
+
+.circular-gallery-card span {
+  position: absolute;
+  z-index: 1;
+  left: 18px;
+  bottom: 18px;
+  color: rgba(255, 255, 255, .64);
+  font: 10px/1 monospace;
+}
+
+@media (max-width: 680px) {
+  .circular-gallery-card {
+    top: 22px;
+    height: 205px;
+    border-radius: 17px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .circular-gallery-card { will-change: auto; }
+}
