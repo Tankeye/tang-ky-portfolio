@@ -5,6 +5,8 @@ import CircularGallery from "./components/CircularGallery";
 import ClickSpark from "./components/ClickSpark";
 import TiltedCard from "./components/TiltedCard";
 import GridScan from "./components/GridScan";
+import Aurora from "./components/Aurora";
+import GradientText from "./components/GradientText";
 
 const galleryCards = [
   "#91a9cf",
@@ -90,7 +92,16 @@ export default function Home() {
 
         <div className="hero-copy shell">
           <p>PRODUCT EXPERIENCE DESIGNER · 2026</p>
-          <h1>Tang KY</h1>
+          <h1>
+            <GradientText
+              colors={["#b7ff00", "#ffffff", "#5b7cff", "#b7ff00"]}
+              animationSpeed={3.8}
+              direction="horizontal"
+              yoyo={false}
+            >
+              Tang KY
+            </GradientText>
+          </h1>
           <div className="hero-subline">
             <span><ShinyText text="PORTFOLIO" speed={3} delay={1.4} color="#d9dadd" shineColor="#ffffff" /></span>
             <span>产品体验设计 / 用户研究 / 视觉表达</span>
@@ -101,6 +112,15 @@ export default function Home() {
           <CircularGallery items={galleryCards} bend={54} scrollSpeed={1.05} scrollEase={0.07} />
         </div>
       </section>
+
+      <div className="content-stage">
+      <Aurora
+        className="content-aurora"
+        colorStops={["#2457ff", "#7cff67", "#6d35ff"]}
+        blend={0.42}
+        amplitude={0.92}
+        speed={1.15}
+      />
 
       <section className="about shell" id="about">
         <div className="section-title">
@@ -207,9 +227,16 @@ export default function Home() {
           <small>03 / CONTACT</small>
           <h2><ShinyText text="LET'S TALK." speed={3.2} delay={1.8} color="#d9dadd" shineColor="#ffffff" /></h2>
         </div>
-        <a href="mailto:17266660445@163.com">17266660445@163.com <span>↗</span></a>
+        <div className="contact-actions">
+          <a className="contact-email" href="mailto:17266660445@163.com">17266660445@163.com <span>↗</span></a>
+          <div className="wechat-qr">
+            <img src="/wechat-qr.png" alt="汤开杨的微信二维码" />
+            <div><small>WECHAT</small><span>扫码联系我</span></div>
+          </div>
+        </div>
         <p>汤开杨 · 产品体验设计师 · HUNAN UNIVERSITY</p>
       </footer>
+      </div>
     </main>
     </ClickSpark>
   );
