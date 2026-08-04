@@ -6,6 +6,7 @@ import "./CircularGallery.css";
 export type CircularGalleryItem = {
   color: string;
   label?: string;
+  image?: string;
 };
 
 type CircularGalleryProps = {
@@ -139,6 +140,7 @@ export default function CircularGallery({
           style={{ background: item.color }}
           aria-hidden="true"
         >
+          {item.image ? <img className="circular-gallery-image" src={item.image} alt="" draggable={false} /> : null}
           {item.label ? <span>{item.label}</span> : null}
         </div>
       ))}

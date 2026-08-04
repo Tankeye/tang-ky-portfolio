@@ -8,6 +8,14 @@ import GridScan from "./components/GridScan";
 import Aurora from "./components/Aurora";
 import GradientText from "./components/GradientText";
 
+const galleryImages = [
+  "/gallery-ai-shopping.jpg",
+  "/gallery-intern-product.jpg",
+  "/gallery-oppo-evaluation.jpg",
+  "/gallery-xiaomi-thermal.jpg",
+  "/gallery-colmo-consistency.jpg",
+];
+
 const galleryCards = [
   "#91a9cf",
   "#e8612d",
@@ -17,14 +25,26 @@ const galleryCards = [
   "#942732",
   "#c6ed59",
   "#727985",
-].map((color, index) => ({ color, label: String(index + 1).padStart(2, "0") }));
+].map((color, index) => ({
+  color,
+  label: String(index + 1).padStart(2, "0"),
+  image: galleryImages[index],
+}));
 
 const works = [
-  { no: "01", type: "RESEARCH", title: "COLMO 多端一致性研究", tone: "blue" },
-  { no: "02", type: "RESEARCH", title: "小米热体验研究", tone: "orange" },
-  { no: "03", type: "AI EXPERIENCE", title: "OPPO AI 智能感评估", tone: "green" },
-  { no: "04", type: "VISUAL DESIGN", title: "游戏视觉设计", tone: "violet" },
-  { no: "05", type: "COMING SOON", title: "作品待补充", tone: "lime" },
+  {
+    no: "01",
+    type: "RESEARCH",
+    title: "AI导购全流程体验升级",
+    tone: "blue",
+    image: "/project-ai-shopping.jpg",
+    href: "/projects/ai-shopping",
+    description: "围绕唯品会AI购物体验升级，探索AI如何融入完整购物链路。针对当前AI购物存在的路径割裂、需求理解不足和决策成本高等问题，从需求表达、商品判断、推荐决策和反馈优化四个环节重新定义AI介入方式，提升用户购物决策效率。",
+  },
+  { no: "02", type: "RESEARCH", title: "小米热体验研究", tone: "orange", description: "*******************************" },
+  { no: "03", type: "AI EXPERIENCE", title: "OPPO AI 智能感评估", tone: "green", description: "*******************************" },
+  { no: "04", type: "VISUAL DESIGN", title: "游戏视觉设计", tone: "violet", description: "*******************************" },
+  { no: "05", type: "COMING SOON", title: "作品待补充", tone: "lime", description: "*******************************" },
 ];
 
 const experiences = [
@@ -209,13 +229,22 @@ export default function Home() {
               colors={["#b7ff00", "#63f5c8", "#745bff"]}
               fillOpacity={0.16}
             >
-              <article className="work-card">
+              <article className="work-card" tabIndex={item.href ? undefined : 0}>
+                {item.href && <a className="work-card-link" href={item.href} aria-label={`查看${item.title}完整项目`} />}
                 <div className="work-card-head"><span>{item.no}</span><small>{item.type}</small></div>
                 <h3><ShinyText text={item.title} speed={3.6} delay={2} color="#d7d9dd" shineColor="#ffffff" /><i>·</i></h3>
-                <div className="work-placeholder" aria-label="作品图片占位区域">
-                  <span /><span /><span />
+                <div className={`work-placeholder ${item.image ? "has-image" : ""}`} aria-label={item.image ? `${item.title}项目封面` : "作品图片占位区域"}>
+                  {item.image ? (
+                    <img className="work-project-image" src={item.image} alt={`${item.title}项目封面`} />
+                  ) : (
+                    <><span /><span /><span /></>
+                  )}
+                  <div className="work-intro">
+                    <h4>项目简介：</h4>
+                    <p>{item.description}</p>
+                  </div>
                 </div>
-                <footer>IMAGE PLACEHOLDER <b>↗</b></footer>
+                <footer>{item.image ? "PROJECT COVER" : "IMAGE PLACEHOLDER"} <b>↗</b></footer>
               </article>
             </BorderGlow>
           ))}
