@@ -1,4 +1,5 @@
 .project-viewer {
+  --project-accent: #ff3b83;
   min-height: 100vh;
   color: #f5f5f7;
   background:
@@ -28,7 +29,7 @@
 .project-viewer-header > div { display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .project-viewer-header strong { font-size: 15px; font-weight: 650; }
 .project-viewer-header span, .project-viewer-header small { color: rgba(255,255,255,.42); font: 9px/1 monospace; letter-spacing: .13em; }
-.project-viewer-header small { justify-self: end; color: #ff3b83; }
+.project-viewer-header small { justify-self: end; color: var(--project-accent); }
 
 .project-pages { width: min(1760px, calc(100% - 32px)); margin: 0 auto; padding: 32px 0 100px; display: grid; gap: 28px; }
 .project-pages figure { position: relative; margin: 0; border: 1px solid rgba(255,255,255,.1); border-radius: 18px; overflow: hidden; background: #11131a; box-shadow: 0 22px 70px rgba(0,0,0,.35); }

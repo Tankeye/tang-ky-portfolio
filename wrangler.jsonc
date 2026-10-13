@@ -1,0 +1,27 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "site-creator-vinext-starter",
+	"compatibility_date": "2026-05-22",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "./worker/index.ts",
+	"assets": {
+		"directory": "dist/client",
+		"not_found_handling": "none",
+		"binding": "ASSETS"
+	},
+	"cache": {
+		"enabled": true
+	},
+	"images": {
+		"binding": "IMAGES"
+	},
+	"kv_namespaces": [
+
+		{
+			"binding": "VINEXT_KV_CACHE",
+			"id": "950d493ebc4b43b8b01768b9202ef0a4"
+		}
+	]
+}

@@ -1,13 +1,27 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, type CSSProperties } from "react";
 
-const pageImages = Array.from(
-  { length: 11 },
-  (_, index) => `/projects/ai-shopping/page-${String(index + 1).padStart(2, "0")}.jpg?v=2`,
-);
+type ProtectedProjectViewerProps = {
+  title?: string;
+  projectSlug?: string;
+  pageCount?: number;
+  cacheVersion?: string;
+  accentColor?: string;
+};
 
-export default function ProtectedProjectViewer() {
+export default function ProtectedProjectViewer({
+  title = "AI导购全流程体验升级",
+  projectSlug = "ai-shopping",
+  pageCount = 11,
+  cacheVersion = "2",
+  accentColor = "#ff3b83",
+}: ProtectedProjectViewerProps) {
+  const pageImages = Array.from(
+    { length: pageCount },
+    (_, index) => `/projects/${projectSlug}/page-${String(index + 1).padStart(2, "0")}.jpg?v=${cacheVersion}`,
+  );
+
   useEffect(() => {
     const preventDefault = (event: Event) => event.preventDefault();
     const preventSave = (event: KeyboardEvent) => {
@@ -29,26 +43,30 @@ export default function ProtectedProjectViewer() {
   }, []);
 
   return (
-    <main className="project-viewer" onContextMenu={(event) => event.preventDefault()}>
+    <main
+      className="project-viewer"
+      style={{ "--project-accent": accentColor } as CSSProperties}
+      onContextMenu={(event) => event.preventDefault()}
+    >
       <header className="project-viewer-header">
         <a href="/#work" aria-label="返回作品集项目列表">← 返回作品集</a>
         <div>
-          <strong>AI导购全流程体验升级</strong>
-          <span>PROJECT CASE · 11 PAGES</span>
+          <strong>{title}</strong>
+          <span>PROJECT CASE · {pageCount} PAGES</span>
         </div>
         <small>VIEW ONLY</small>
       </header>
 
-      <section className="project-pages" aria-label="AI导购全流程体验升级项目内容">
+      <section className="project-pages" aria-label={`${title}项目内容`}>
         {pageImages.map((src, index) => (
           <figure key={src}>
             <img
               src={src}
-              alt={`AI导购全流程体验升级项目第 ${index + 1} 页`}
+              alt={`${title}项目第 ${index + 1} 页`}
               draggable={false}
               loading={index < 2 ? "eager" : "lazy"}
             />
-            <figcaption>{String(index + 1).padStart(2, "0")} / 11</figcaption>
+            <figcaption>{String(index + 1).padStart(2, "0")} / {pageCount}</figcaption>
           </figure>
         ))}
       </section>
